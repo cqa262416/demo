@@ -13,4 +13,8 @@ public class LoginController {
     public String login(){
         return "login.html";
     }
+    @RequestMapping(value = "/logout")
+    public String logout(){
+        return "login.html";
+    }
 }
