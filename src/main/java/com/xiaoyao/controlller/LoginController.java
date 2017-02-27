@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class LoginController {
-    //登录成功
+    //成功
     @RequestMapping(value = "/")
     public String login(){
+        System.out.println("login success!!!");
         return "login.html";
     }
 }
