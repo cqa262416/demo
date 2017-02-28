@@ -1,5 +1,9 @@
 package com.xiaoyao.controlller;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.impl.SLF4JLogFactory;
+import org.apache.log4j.Logger;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -9,10 +13,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class LoginController {
+
+    private static Logger logger = Logger.getLogger(LoginController.class);
     //成功
     @RequestMapping(value = "/")
     public String login(){
-        System.out.println("login success!!!");
+        //System.out.println("login success!!!");
         return "login.html";
+    }
+
+    @Scheduled(fixedDelay = 1000*60, initialDelay = 100)
+    public void worker(){
+        logger.info("login Welcom to you!!!");
+        System.out.println("stdout Welcom to you!!!");
+
     }
 }
