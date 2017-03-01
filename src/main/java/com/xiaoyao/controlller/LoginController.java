@@ -26,6 +26,5 @@ public class LoginController {
     public void worker(){
         logger.info("login Welcom to you!!!");
         System.out.println("stdout Welcom to you!!!");
-
     }
 }
