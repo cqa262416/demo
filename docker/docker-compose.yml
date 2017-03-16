@@ -1,0 +1,36 @@
+version: "3.0"
+services:
+    mysql:
+        image: registry.cn-hangzhou.aliyuncs.com/qinyujia-test/mysql
+        ports: ["3306"]
+        environment:
+            MYSQL_USER: parsec326
+            MYSQL_PASSWORD: databasepwd
+            MYSQL_ROOT_PASSWORD: pasSwdMy0326sqL
+            TZ: Asia/Shanghai
+        command: [mysqld, --character-set-server=utf8mb4, --collation-server=utf8mb4_unicode_ci]
+        volumes:
+            - "/mnt/mysqldata/mysql:/var/lib/mysql"
+        restart: always
+    activemq:
+        image: registry.cn-hangzhou.aliyuncs.com/scho/activemq
+        ports: ["61616", "8161"]
+        environment:
+            TZ: Asia/Shanghai
+        restart: always
+    tomcat:
+        image: registry.cn-hangzhou.aliyuncs.com/zuowenbo/tomcat8
+        ports: ["8080:8080"]
+        links:
+            - mysql
+            - activemq
+        depends_on:
+            - mysql
+            - activemq
+        volumes:
+            - "/mnt/tomcatdata/tomcat/webapps:/usr/local/tomcat/webapps"
+            - "/mnt/tomcatdata/tomcat/conf:/usr/local/tomcat/conf"
+            - "/mnt/tomcatdata/tomcat/logs:/usr/local/tomcat/logs"
+        environment:
+            TZ: Asia/Shanghai
+        restart: always
