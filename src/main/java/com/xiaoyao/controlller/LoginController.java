@@ -22,9 +22,9 @@ public class LoginController {
         return "login.html";
     }
 
-    @Scheduled(fixedDelay = 1000*60, initialDelay = 100)
+    @Scheduled(fixedDelay = 1000, initialDelay = 100)
     public void worker(){
-        logger.info("login Welcom to you!!!");
-        System.out.println("stdout Welcom to you!!!");
+        logger.info("xiaoyao Welcom to you!!!");
+        System.out.println("xiaoyao Welcom to you!!!");
     }
 }

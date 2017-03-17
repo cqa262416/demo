@@ -1,36 +1,13 @@
-version: "3.0"
+version: "2.0"
 services:
-    mysql:
-        image: registry.cn-hangzhou.aliyuncs.com/qinyujia-test/mysql
-        ports: ["3306"]
-        environment:
-            MYSQL_USER: parsec326
-            MYSQL_PASSWORD: databasepwd
-            MYSQL_ROOT_PASSWORD: pasSwdMy0326sqL
-            TZ: Asia/Shanghai
-        command: [mysqld, --character-set-server=utf8mb4, --collation-server=utf8mb4_unicode_ci]
-        volumes:
-            - "/mnt/mysqldata/mysql:/var/lib/mysql"
-        restart: always
-    activemq:
-        image: registry.cn-hangzhou.aliyuncs.com/scho/activemq
-        ports: ["61616", "8161"]
-        environment:
-            TZ: Asia/Shanghai
-        restart: always
-    tomcat:
-        image: registry.cn-hangzhou.aliyuncs.com/zuowenbo/tomcat8
+    jdk:
+        image: registry.cn-hangzhou.aliyuncs.com/alirobot/oraclejdk8-nscd
         ports: ["8080:8080"]
-        links:
-            - mysql
-            - activemq
-        depends_on:
-            - mysql
-            - activemq
         volumes:
-            - "/mnt/tomcatdata/tomcat/webapps:/usr/local/tomcat/webapps"
-            - "/mnt/tomcatdata/tomcat/conf:/usr/local/tomcat/conf"
-            - "/mnt/tomcatdata/tomcat/logs:/usr/local/tomcat/logs"
+            - "/mnt/demo:/usr/local/project"
         environment:
             TZ: Asia/Shanghai
+            WORKDIR: /usr/local/project
+        command: []
+        entrypoint: [java,-jar,/usr/local/project/demo-0.0.1-SNAPSHOT.jar]
         restart: always
